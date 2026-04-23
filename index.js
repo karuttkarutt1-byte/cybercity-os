@@ -208,3 +208,16 @@ systemTick();
 window.addEventListener("load", () => {
   searchInput?.focus();
 });
+const SFX = {
+  click: new Audio("assets/sounds/click.mp3"),
+  hover: new Audio("assets/sounds/hover.mp3"),
+  open: new Audio("assets/sounds/open.mp3"),
+  error: new Audio("assets/sounds/error.mp3")
+};
+
+function play(name){
+  const s = SFX[name];
+  if(!s) return;
+  s.currentTime = 0;
+  s.play();
+}
