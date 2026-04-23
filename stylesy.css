@@ -368,3 +368,20 @@ body {
     #05070d;
   background-size: cover;
 }
+
+.panel {
+  background: url("assets/ui/noise.png"),
+              rgba(10,15,25,0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(110,231,255,0.2);
+  box-shadow: 0 0 20px rgba(110,231,255,0.1);
+}
+
+@font-face {
+  font-family: "CyberCity";
+  src: url("assets/fonts/cybercity.ttf");
+}
+
+body {
+  font-family: "CyberCity", "Figtree", sans-serif;
+}
