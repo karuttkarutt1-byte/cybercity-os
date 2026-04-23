@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html>
-<body style="background:black;color:#0f0;font-family:monospace;padding:10px;">
+<body style="background:#0a0f1f;color:white;padding:20px;font-family:sans-serif;">
 
-<div id="log"></div>
-<input id="cmd" autofocus placeholder="type command">
+<h2>Settings</h2>
+
+<label>
+  <input type="checkbox" id="sound">
+  Enable Sound
+</label>
 
 <script>
-const log = document.getElementById("log");
-const input = document.getElementById("cmd");
+const sound = document.getElementById("sound");
 
-function print(t){
-  log.innerHTML += "<div>> " + t + "</div>";
-}
+sound.checked = localStorage.getItem("sound") === "true";
 
-input.onkeydown = e=>{
-  if(e.key==="Enter"){
-    run(input.value);
-    input.value="";
-  }
+sound.onchange = () => {
+  localStorage.setItem("sound", sound.checked);
 };
-
-function run(cmd){
-  print(cmd);
-
-  if(cmd==="help") print("open [url], clear");
-  else if(cmd.startsWith("open ")) window.parent.openBrowser(cmd.split(" ")[1]);
-  else if(cmd==="clear") log.innerHTML="";
-}
 </script>
 
 </body>
