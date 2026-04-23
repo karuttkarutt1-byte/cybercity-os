@@ -222,3 +222,7 @@ function play(name){
   s.play();
 }
 document.addEventListener("click", () => play("click"));
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
