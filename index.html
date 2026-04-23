@@ -5,14 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Moonlight Cybercity Engine</title>
+<title>Moonlight Cybercity</title>
 
-<meta name="description" content="Cybercity OS-style learning and browsing engine">
-<meta name="theme-color" content="#05070d">
-<meta name="credits" content="Inspired by Endis educational platform and proxy-based navigation systems">
-
-<link rel="icon" href="favicon.ico">
-<link rel="manifest" href="manifest.json">
+<meta name="description" content="Cybercity learning + browsing engine">
+<meta name="theme-color" content="#0b0f1a">
+<meta name="credits" content="Inspired by Endis educational platform UI/UX concepts">
 
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -22,189 +19,111 @@
 
 <body>
 
-<!-- =========================
-     BACKGROUND
-========================= -->
-<canvas id="cityCanvas"></canvas>
-<div id="fog"></div>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Moonlight</div>
 
-<!-- =========================
-     BOOT SCREEN
-========================= -->
-<div id="boot">
-  <h1>Booting Cybercity Engine...</h1>
-</div>
-
-<!-- =========================
-     HEADER
-========================= -->
-<header>
-  <div class="logo">
-    🌙 CYBERCITY OS
-  </div>
-
-  <nav>
+  <nav class="nav">
+    <a class="active">Home</a>
     <a onclick="openApp('browser')">Browser</a>
-    <a onclick="openApp('terminal')">Terminal</a>
-    <a onclick="openApp('notes')">Notes</a>
+    <a onclick="openApp('notes')">Tools</a>
     <a onclick="openApp('settings')">Settings</a>
   </nav>
+
+  <div class="header-actions">
+    ⚙
+  </div>
 </header>
 
-<!-- =========================
-     MAIN UI
-========================= -->
-<main>
+<!-- MAIN -->
+<main class="container">
 
-  <div class="hero">
-    <h1>Moonlight Cybercity</h1>
-    <p>Learn • Browse • Control • Explore</p>
+  <!-- GREETING -->
+  <div class="greeting">
+    <p id="greetingText"></p>
+    <h1>What do you want to explore?</h1>
   </div>
 
   <!-- SEARCH -->
-  <form class="search" id="searchForm">
-    <input id="search" placeholder="Search or enter URL...">
+  <form class="search-box" id="searchForm">
+    <input id="search" placeholder="Search the web or enter a URL...">
     <button>→</button>
   </form>
 
-  <!-- APP GRID -->
-  <div class="grid">
+  <!-- CARDS -->
+  <div class="tools">
 
-    <div class="card" onclick="openApp('browser')">
-      <img src="assets/icons/browser.svg">
-      <span>Browser</span>
+    <div class="tool featured" onclick="openApp('browser')">
+      <div class="icon">🌐</div>
+      <div>
+        <h3>Browser</h3>
+        <p>Search and explore securely</p>
+      </div>
     </div>
 
-    <div class="card" onclick="openApp('terminal')">
-      <img src="assets/icons/terminal.svg">
-      <span>Terminal</span>
+    <div class="tool" onclick="openApp('notes')">
+      <div class="icon">📝</div>
+      <div>
+        <h3>Notes</h3>
+        <p>Save ideas and tasks</p>
+      </div>
     </div>
 
-    <div class="card" onclick="openApp('notes')">
-      <img src="assets/icons/folder.svg">
-      <span>Notes</span>
+    <div class="tool" onclick="openApp('terminal')">
+      <div class="icon">⌨</div>
+      <div>
+        <h3>Terminal</h3>
+        <p>Run commands</p>
+      </div>
     </div>
 
-    <div class="card" onclick="openApp('settings')">
-      <img src="assets/icons/settings.svg">
-      <span>Settings</span>
+    <div class="tool" onclick="openApp('settings')">
+      <div class="icon">⚙</div>
+      <div>
+        <h3>Settings</h3>
+        <p>Customize your system</p>
+      </div>
     </div>
 
   </div>
 
 </main>
 
-<!-- =========================
-     APP WINDOW (OS STYLE)
-========================= -->
-<div id="browser">
+<!-- APP WINDOW -->
+<div id="browser" class="window">
   <div class="window-bar">
     <span id="window-title">App</span>
     <button onclick="closeWindow()">✕</button>
   </div>
-
   <iframe id="frame"></iframe>
 </div>
 
-<!-- =========================
-     COMMAND PALETTE
-========================= -->
-<div id="cmd">
-  <input id="cmdInput" placeholder="Type command (open google.com)">
-</div>
-
-<!-- =========================
-     FOOTER
-========================= -->
-<footer>
-  <p>
-    © 2026 Moonlight Cybercity Engine  
-    <br>
-    Inspired by Endis (educational + proxy UI concepts)
-  </p>
+<!-- FOOTER -->
+<footer class="footer">
+  Inspired by Endis (UI/UX concepts)
 </footer>
 
-<!-- =========================
-     SCRIPTS
-========================= -->
 <script src="engine.js"></script>
 
 <script>
-/* =========================
-   BOOT SCREEN
-========================= */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("boot").style.display = "none";
-  }, 1200);
-});
+/* greeting */
+const h = new Date().getHours();
+const g = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+document.getElementById("greetingText").textContent = g;
 
-/* =========================
-   OPEN APP SYSTEM
-========================= */
-function openApp(app){
-  const browser = document.getElementById("browser");
-  const frame = document.getElementById("frame");
-  const title = document.getElementById("window-title");
-
-  browser.style.display = "flex";
-  frame.src = "apps/" + app + "/index.html";
-
-  title.textContent = app.toUpperCase();
-}
-
-/* CLOSE WINDOW */
-function closeWindow(){
-  document.getElementById("browser").style.display = "none";
-}
-
-/* =========================
-   SEARCH HANDLER
-========================= */
-document.getElementById("searchForm").onsubmit = (e) => {
+/* search */
+searchForm.onsubmit = e => {
   e.preventDefault();
 
-  const q = document.getElementById("search").value.trim();
+  const q = search.value.trim();
   if(!q) return;
 
   let url;
-
-  try {
-    url = new URL(q).href;
-  } catch {
-    url = "https://duckduckgo.com/?q=" + encodeURIComponent(q);
-  }
+  try { url = new URL(q).href; }
+  catch { url = "https://duckduckgo.com/?q=" + encodeURIComponent(q); }
 
   openApp("browser");
-  document.getElementById("frame").src =
-    "apps/browser/index.html?url=" + encodeURIComponent(url);
-};
-
-/* =========================
-   COMMAND PALETTE
-========================= */
-document.addEventListener("keydown", e => {
-  if(e.ctrlKey && e.key === "k"){
-    document.getElementById("cmd").style.display = "block";
-    document.getElementById("cmdInput").focus();
-  }
-
-  if(e.key === "Escape"){
-    document.getElementById("cmd").style.display = "none";
-  }
-});
-
-document.getElementById("cmdInput").onkeydown = e => {
-  if(e.key !== "Enter") return;
-
-  const val = e.target.value;
-  e.target.value = "";
-
-  if(val.startsWith("open ")){
-    openApp("browser");
-    document.getElementById("frame").src =
-      "apps/browser/index.html?url=" + encodeURIComponent(val.split(" ")[1]);
-  }
+  frame.src = "apps/browser/index.html?url=" + encodeURIComponent(url);
 };
 </script>
 
