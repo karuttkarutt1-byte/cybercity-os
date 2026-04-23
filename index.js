@@ -228,3 +228,10 @@ if ("serviceWorker" in navigator) {
 }
 
 const settings = JSON.parse(localStorage.getItem("settings")) || {};
+function openApp(app, params=""){
+  const browser = document.getElementById("browser");
+  browser.style.display = "flex";
+
+  document.getElementById("frame").src =
+    "apps/" + app + "/index.html" + params;
+}
