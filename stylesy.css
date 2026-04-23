@@ -360,3 +360,11 @@ footer{
 ::selection{
   background:rgba(110,231,255,0.25);
 }
+
+body {
+  background:
+    url("assets/images/stars.png"),
+    radial-gradient(circle at 50% 20%, rgba(110,231,255,0.08), transparent 60%),
+    #05070d;
+  background-size: cover;
+}
