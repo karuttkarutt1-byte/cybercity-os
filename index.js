@@ -226,3 +226,5 @@ document.addEventListener("click", () => play("click"));
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
 }
+
+const settings = JSON.parse(localStorage.getItem("settings")) || {};
