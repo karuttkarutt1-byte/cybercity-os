@@ -221,3 +221,4 @@ function play(name){
   s.currentTime = 0;
   s.play();
 }
+document.addEventListener("click", () => play("click"));
